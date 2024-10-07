@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <!-- Define o tipo de documento como HTML5 -->
+    <meta charset="UTF-8" />
+    <!-- Define que a página será visualizada adequadamente em dispositivos móveis -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Título da página, exibido na aba do navegador -->
+    <title>Página Inicial - Venda de Ingressos</title>
+    <!-- Link externo para o arquivo de estilo CSS, que define a aparência da página -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Cabeçalho da página, geralmente usado para apresentar o logo e o menu de navegação -->
+    <header>
+      <!-- Div usada para agrupar a logo e o título, facilitando o estilo com flexbox -->
+      <div class="logo">
+        <!-- Logo do site inserida com a tag <img>, que exibe uma imagem -->
+        <img src="logo.png" alt="Logo do site" />
+        <!-- Título principal do site, exibido dentro do cabeçalho -->
+        <h1>IngressosFácil</h1>
+      </div>
+      <!-- Parágrafo abaixo do título, dando uma breve descrição do site -->
+      <p>Compre seus ingressos com facilidade</p>
+      <!-- Menu de navegação que contém uma lista de links para diferentes seções da página -->
+      <nav>
+        <ul>
+          <!-- Cada link no menu, que direciona para uma seção específica da página -->
+          <li><a href="#home">Início</a></li>
+          <li><a href="#eventos">Eventos</a></li>
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <button class="botao-header" onclick="window.location.href='cadastro.html'">Cadastro</button>
+    </header>
+
+    <!-- Conteúdo principal da página, onde informações principais são exibidas -->
+    <main>
+      <!-- Seção de boas-vindas, identificada por um ID para estilização específica -->
+      <section id="home">
+        <!-- Título da seção de boas-vindas -->
+        <h2>Bem-vindo ao IngressosFácil</h2>
+        <!-- Parágrafo descrevendo brevemente o objetivo do site -->
+        <p>
+          Aqui você encontra ingressos para os melhores eventos da sua cidade.
+        </p>
+      </section>
+
+      <!-- Seção que lista os eventos disponíveis -->
+      <section id="eventos">
+        <!-- Título da seção de eventos -->
+        <h2>Próximos Eventos</h2>
+        <!-- Div que agrupa os eventos, com um layout em grade flexível -->
+        <div class="eventos-container">
+          <!-- Cada evento é representado por uma "caixa" (div) -->
+          <div class="evento-item">
+            <!-- Título do evento -->
+            <h3>Show de Rock</h3>
+            <!-- Data do evento -->
+            <p>Data: 25 de Setembro</p>
+          </div>
+          <div class="evento-item">
+            <!-- Título do segundo evento -->
+            <h3>Teatro: A Comédia da Vida</h3>
+            <!-- Data do segundo evento -->
+            <p>Data: 30 de Setembro</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção sobre a empresa ou organização responsável pelo site -->
+      <section id="sobre">
+        <!-- Título da seção "Sobre Nós" -->
+        <h2>Sobre Nós</h2>
+        <!-- Breve descrição da empresa -->
+        <p>
+          Somos uma empresa dedicada a facilitar a compra de ingressos para
+          eventos culturais e esportivos.
+        </p>
+      </section>
+    </main>
+
+    <!-- Rodapé da página, com informações como direitos autorais -->
+    <footer>
+      <!-- Texto exibido no rodapé -->
+      <p>&copy; 2024 IngressosFácil - Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        function mostrarMensagem(){
+            alert("Olá você clicou no botão!!");
+        }
+    </script>
+    <script src="app.js"></script>
+  </body>
+</html>
