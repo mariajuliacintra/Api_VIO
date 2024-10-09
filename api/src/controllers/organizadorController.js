@@ -1,11 +1,11 @@
-let organizadores = [];
+const connect = require('../db/connect');
 let orgIndex = 1;
 
 module.exports = class organizadorController {
   static async createOrganizador(req, res) {
-    const { nome, email, password, telefone} = req.body;
+    const { name, email, password, telefone} = req.body;
 
-    if (!telefone || !email || !password || !nome) {
+    if (!telefone || !email || !password || !name) {
       return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     } else if (isNaN(telefone) || telefone.length !== 11) {
       return res.status(400).json({
@@ -16,24 +16,38 @@ module.exports = class organizadorController {
     }
 
     // Verifica se já existe um usuário com o mesmo email
-    const existingOrg = organizadores.find((org) => org.email === email);
-    if (existingOrg) {
-      return res.status(400).json({ error: "Email já cadastrado" });
-    }
+    const query = `INSERT INTO organizador (telefone, password, email, nome) VALUES(
+      '${telefone}',
+      '${password}',
+      '${email}',
+      '${name}')`;
 
-    // Cria e adiciona novo usuário de organizador
-    const newOrganizador = { id: orgIndex++, nome, email, password, telefone};
-    organizadores.push(newOrganizador);
-    return res
-      .status(201)
-      .json({ message: "Usuario de organizador criado com sucesso"
-    });
+    //executando a query criada
+    try{
+      connect.query(query, function(err){
+        if(err){
+          console.log(err);
+          console.log(err.code);
+          if(err.code  === 'ER_DUP_ENTRY'){
+            return res.status(400).json({error: 'O email já está vinculado a outro usuário'});
+          }
+          else{
+            return res.status(500).json({error: 'Erro interno do servidor'});
+          }
+        }
+        else{
+          return res.status(201).json({message: 'Usuário criado com sucesso'});
+        }
+      });
+    }
+    catch(error){
+      console.error(err);
+      return res.status(500).json({error: 'Erro interno do servidor'});
+    }
   }
 
   static async getAllOrganizadores(req, res) {
-    return res
-      .status(200)
-      .json({ message: "Obtendo todos os organizadores", organizadores, orgIndex});
+    return res.status(200).json({ message: "Obtendo todos os usuários" });
   }
 
   static async updateOrg(req, res) {
