@@ -3,7 +3,6 @@ let users = [];
 module.exports = class userController {
   static async createUser(req, res) {
     const { cpf, email, password, name } = req.body;
-
     if (!cpf || !email || !password || !name) {
       return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     } else if (isNaN(cpf) || cpf.length !== 11) {
@@ -38,6 +37,7 @@ module.exports = class userController {
   static async updateUser(req, res) {
     //Desestrutura e recupera os dados enviados via corpo da requisição
     const {cpf, email, password, name} = req.body;
+    
     //Verificar se todos os campos foram preenchidos
     if(!cpf || !email || !password || !name){
       return res.status(400).json({error: "Todos os campos devem ser preenchidos"});
