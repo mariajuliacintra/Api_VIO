@@ -71,6 +71,20 @@ nav ul li a:hover {
 main {
   padding: 20px; /* Espaçamento interno */
 }
+#user-list {
+  background-color: rgba(139, 211, 139, 0.877);
+  display: inline-block;
+  list-style-type:disc;
+  font-family: Arial, sans-serif;
+  color: #076800;
+  text-align: left;
+  font-size: 14x;
+  font-style: oblique;
+  border-radius: 5px;
+  border: 2px solid #06813d;
+  letter-spacing: 2px; /* Aumenta o espaçamento entre as letras */
+  padding: 20px;
+}
 
 /* Estilo aplicado a cada seção dentro do main */
 main section {
