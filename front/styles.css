@@ -71,6 +71,33 @@ nav ul li a:hover {
 main {
   padding: 20px; /* Espaçamento interno */
 }
+
+/*Tabela*/
+table {
+  width: 100%; /* Largura total da tabela */
+  border-collapse: collapse; /* Remove espaços entre bordas */
+  margin-top: 20px; /* Espaçamento superior */
+}
+
+th, td {
+  border: 1px solid #ddd; /* Borda cinza clara */
+  padding: 8px; /* Espaçamento interno */
+  text-align: left; /* Alinhamento à esquerda */
+}
+
+th {
+  background-color: #4caf50; /* Cor de fundo para cabeçalho */
+  color: white; /* Cor do texto no cabeçalho */
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Cor de fundo para linhas pares */
+}
+
+tr:hover {
+  background-color: #ddd; /* Cor de fundo ao passar o mouse */
+}
+
 #user-list {
   background-color: rgba(139, 211, 139, 0.877);
   display: inline-block;

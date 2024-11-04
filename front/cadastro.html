@@ -32,7 +32,9 @@
           <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
-      <button class="botao-header" onclick="window.location.href='index.html'">Home</button>
+      <button class="botao-header" onclick="window.location.href='index.html'">
+        Home
+      </button>
     </header>
 
     <!-- Conteúdo principal da página, onde informações principais são exibidas -->
@@ -44,33 +46,61 @@
         <form id="formulario-registro">
           <!--Entrada do nome-->
           <label for="nome">Nome completo:</label>
-          <input type="text" id="nome" name="nome" required/>
+          <input type="text" id="nome" name="nome" required />
 
           <!--Entrada cpf-->
           <label for="cpf">CPF:</label>
-          <input type="text" id="cpf" name="cpf" required/>
+          <input type="text" id="cpf" name="cpf" required />
 
           <!--Entrada email-->
           <label for="email">E-mail:</label>
-          <input type="email" id="email" name="email" required/>
+          <input type="email" id="email" name="email" required />
 
           <!--Entrada senha-->
           <label for="senha">Senha:</label>
-          <input type="password" id="senha" name="senha" required/>
+          <input type="password" id="senha" name="senha" required />
 
           <!--Botão para enviar o formulário-->
-          <input type="submit" value="cadastrar"/>
+          <input type="submit" value="cadastrar" />
         </form>
       </section>
 
       <section>
         <!--Lista para exibir os usuários cadastrados-->
         <h2>Usuários Cadastrados</h2>
-        <ul id= "user-list"></ul>
+        <ul id="user-list"></ul>
       </section>
 
+      <section>
+        <h2>Usuários Cadastrados via Tabela</h2>
+        <table id="user-table">
+          <thead>
+            <th>Nome</th/>
+            <th>CPF</th>
+            <th>E-mail</th>
+          </thead>
+            <tbody id="user-list-tabela">
+              <!--os usuários serão adicionados aqui-->
 
+            </tbody>
+          
+        </table>
+      </section>
 
+      <section>
+        <h2>Organizadores cadastrados via tabela</h2>
+        <table id="org-table">
+          <thead>
+            <th>Nome</th/>
+            <th>Telefone</th>
+            <th>E-mail</th>
+          </thead>
+            <tbody id="orgs-list-tabela">
+              <!--os usuários serão adicionados aqui-->
+
+            </tbody>
+        </table>
+      </section>
     </main>
 
     <!-- Rodapé da página, com informações como direitos autorais -->
@@ -80,9 +110,9 @@
     </footer>
 
     <script>
-        function mostrarMensagem(){
-            alert("Olá você clicou no botão!!");
-        }
+      function mostrarMensagem() {
+        alert("Olá você clicou no botão!!");
+      }
     </script>
     <script src="app.js"></script>
   </body>
