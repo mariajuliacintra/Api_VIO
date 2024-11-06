@@ -41,7 +41,7 @@ module.exports = class organizadorController {
         } else {
           return res
             .status(201)
-            .json({ message: "Usuário criado com sucesso" });
+            .json({ message: "Organizador criado com sucesso" });
         }
       });
     } catch (error) {
