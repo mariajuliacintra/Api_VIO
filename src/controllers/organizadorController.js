@@ -1,5 +1,4 @@
 const connect = require("../db/connect");
-let organizadorId = 1;
 
 module.exports = class organizadorController {
   static async createOrganizador(req, res) {
