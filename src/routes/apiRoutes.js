@@ -5,7 +5,7 @@ const userController = require("../controllers/userController");
 const eventoController = require("../controllers/eventoController");
 const ingressoController = require("../controllers/ingressoController");
 
-
+//http://localhost:5000/api/v1
 //rotas users
 router.post("/user/", userController.createUser);
 router.get("/user/", userController.getAllUsers);

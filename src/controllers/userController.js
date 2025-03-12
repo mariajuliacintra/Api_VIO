@@ -10,6 +10,8 @@ module.exports = class userController {
     if(validation){
       return res.status(400).json(validation)
     }
+
+    try{
     const cpfValidation = await validateCpf(cpf, null)
     if (cpfValidation){
       return res.status(400).json(cpfValidation)
@@ -24,7 +26,7 @@ module.exports = class userController {
         '${data_nascimento}')`;
 
     //executando a query criada
-    try {
+    
       connect.query(query, function (err) {
         if (err) {
           console.log(err);
@@ -61,49 +63,51 @@ module.exports = class userController {
           .json({ message: "Lista de usuários", users: results });
       });
     } catch (error) {
-      console.error("Erroa o executar consulta", error);
+      console.error("Erro ao executar consulta", error);
       return res.status(500).json({ error: "Erro interno do servidor" });
     }
   }
 
   static async updateUser(req, res) {
-    //Desestrutura e recupera os dados enviados via corpo da requisição
-    const { cpf, email, password, name, id } = req.body;
-    const validation = validateUser(req.body); 
+    const { cpf, email, password, name, data_nascimento, id } = req.body;
 
-    if(validation){
-      return res.status(400).json(validation)
+    const validationError = validateUser(req.body);
+    if (validationError) {
+      return res.status(400).json(validationError);
     }
 
-    const cpfValidation = await validateCpf(cpf, id)
-    if (cpfValidation){
-      return res.status(400).json(cpfValidation)
-    }
-   
-    const query = `UPDATE usuario SET name=?, email=?, password=?, cpf=? WHERE id_usuario=?`;
-    const values = [name, email, password, cpf, id];
     try {
-      connect.query(query, values, function (err, results) {
-        if (err) {
-          if (err.code === "ER_DUP_ENTRY") {
-            return res
-              .status(400)
-              .json({ error: "Email já cadastrado por outro usuário" });
-          } else {
-            console.error(err);
-            return res.status(500).json({ error: "Erro interno do servidor" });
+      const cpfError = await validateCpf(cpf, id);
+      if (cpfError) {
+        return res.status(400).json(cpfError);
+      }
+      const query =
+        "UPDATE usuario SET cpf = ?, email = ?, password = ?, name = ? , data_nascimento=? WHERE id_usuario = ?";
+      connect.query(
+        query,
+        [cpf, email, password, name, data_nascimento, id],
+        (err, results) => {
+          if (err) {
+            if (err.code === "ER_DUP_ENTRY") {
+              if (err.message.includes("email")) {
+                return res.status(400).json({ error: "Email já cadastrado" });
+              }
+            } else {
+              return res
+                .status(400)
+                .json({ error: "CPF já cadastrado"});
+            }
           }
+          if (results.affectedRows === 0) {
+            return res.status(404).json({ error: "Usuário não encontrado" });
+          }
+          return res
+            .status(200)
+            .json({ message: "Usuário atualizado com sucesso" });
         }
-        if (results.affectedRows == 0) {
-          return res.status(404).json({ error: "Usuário não encontrado" });
-        }
-        return res
-          .status(200)
-          .json({ message: "Usuário foi atualizado com sucesso" });
-      });
+      );
     } catch (error) {
-      console.error("Erro ao executar consulta", error);
-      return res.status(500).json({ error: "Erro interno no servidor" });
+      return res.status(500).json({ error });
     }
   }
 
