@@ -55,3 +55,29 @@ end; //
 
 delimiter ;
 
+-- Procedure para resumi do usuario
+delimiter //
+create procedure resumo_usuario(in pid int)
+begin
+    declare nome varchar(100);
+    declare email varchar(100);
+    declare totalrs decimal(10,2);
+    declare faixa varchar(20);
+
+    -- Busca o nome e o email do usuario
+    select u.name, u.email into nome, email
+    from usuario u 
+    where u.id_usuario = pid;
+
+    -- Chamada das funções específicas já criadas 
+    set totalrs = calcula_total_gasto(pid);
+    set faixa = buscar_faixa_etaria_usuario(pid);
+    
+    -- mostra os dados formados 
+    select nome as nome_usuario, email as email_usuario, totalrs as total_gasto, faixa as faixa_etaria;
+end ; //
+
+delimiter;
+
+
+
