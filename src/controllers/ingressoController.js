@@ -99,4 +99,38 @@ module.exports = class ingressoController{
             res.status(500).json({error: "Erro interno no servidor"});
         }
     }
+
+    static async getByIdEvento(req, res) {
+        const eventoId = req.params.id;
+      
+        const query = `
+          SELECT 
+            ingresso.id_ingresso, 
+            ingresso.preco, 
+            ingresso.tipo, 
+            ingresso.fk_id_evento, 
+            evento.nome AS nome_evento
+          FROM ingresso
+          JOIN evento ON ingresso.fk_id_evento = evento.id_evento
+          WHERE evento.id_evento = ?;
+        `;
+      
+        try {
+          connect.query(query, [eventoId], (err, results) => {
+            if (err) {
+              console.error("Erro ao buscar ingressos por evento:", err);
+              return res.status(500).json({ error: "Erro ao buscar ingressos do evento" });
+            }
+      
+            res.status(200).json({
+              message: "Ingressos do evento obtidos com sucesso",
+              ingressos: results,
+            });
+          });
+        } catch (error) {
+          console.error("Erro ao executar a consulta:", error);
+          res.status(500).json({ error: "Erro interno do servidor" });
+        }
+      }
+    
 }
