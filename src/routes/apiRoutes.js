@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const verifyJWT = require("../services/verifyJWT")
 
 const organizadorController = require("../controllers/organizadorController");
 const userController = require("../controllers/userController");
@@ -8,7 +9,7 @@ const ingressoController = require("../controllers/ingressoController");
 //http://localhost:5000/api/v1
 //rotas users
 router.post("/user/", userController.createUser);
-router.get("/user/", userController.getAllUsers);
+router.get("/user/", verifyJWT, userController.getAllUsers);
 router.put("/user/", userController.updateUser);
 router.delete("/user/:id", userController.deleteUser);
 router.post("/login", userController.loginUser);
