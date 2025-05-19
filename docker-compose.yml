@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  app:
+    # O "." indica que a imagem do Docker será construída no diretório atual
+    build: . 
+    # Corrigido: comando agora está entre aspas para evitar erro de parsing
+    command: /bin/sh -c "npm install && npm start"
+    # Corrigido: erro de digitação em "mapeita"
+    ports: 
+      - "5000:5000"
+    # Monta o diretório atual da máquina host no diretório /usr/app dentro do container
+    volumes:
+      - .:/usr/app
+    # Indica que o serviço app depende do serviço db
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    # Corrigido: erro de digitação em "cantainer"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vio_maju
+    ports: 
+      - "3307:3307"
+    volumes: 
+      - db_data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+
+volumes: 
+  db_data:
