@@ -5,6 +5,7 @@ const organizadorController = require("../controllers/organizadorController");
 const userController = require("../controllers/userController");
 const eventoController = require("../controllers/eventoController");
 const ingressoController = require("../controllers/ingressoController");
+const compraController = require("../controllers/compraController");
 
 //http://localhost:5000/api/v1
 //rotas users
@@ -34,6 +35,10 @@ router.get("/ingresso", ingressoController.getAllIngresso);
 router.put("/ingresso", ingressoController.updateIngresso);
 router.delete("/ingresso/:id", ingressoController.deleteIngresso);
 router.get('/ingresso/evento/:id', ingressoController.getByIdEvento);
+
+//Rotas Procedure
+router.post("/comprasimples", compraController.registrarCompraSimples);
+router.post("/compra", compraController.registrarCompra);
 
 
 
