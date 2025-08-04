@@ -1,11 +1,11 @@
 const router = require("express").Router();
 const verifyJWT = require("../services/verifyJWT")
-
 const organizadorController = require("../controllers/organizadorController");
 const userController = require("../controllers/userController");
 const eventoController = require("../controllers/eventoController");
 const ingressoController = require("../controllers/ingressoController");
 const compraController = require("../controllers/compraController");
+const upload = require("../services/upload");
 
 //http://localhost:5000/api/v1
 //rotas users
@@ -22,7 +22,7 @@ router.put("/org/", organizadorController.updateOrg);
 router.delete("/org/:id", organizadorController.deleteOrg);
 
 //rotas eventos
-router.post("/evento", eventoController.createEvento);
+router.post("/evento", upload.single("imagem"), eventoController.createEvento);
 router.get("/evento", eventoController.getAllEventos);
 router.put("/evento", eventoController.updateEvento);
 router.delete("/evento/:id", eventoController.deleteEvento);
